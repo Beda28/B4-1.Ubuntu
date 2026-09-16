@@ -42,6 +42,7 @@ mv /usr/bind/agent-app-linux-x86 /home/agent-admin/agent-app/
 mv /usr/bind/moniter.sh /home/agent-app/bin/
 
 echo 'agent_api_key_test' > /home/agent-admin/agent-app/api_keys/secret.key
+touch /var/log/agent-app/monitor.log
 ```
 
 # 5. 디렉토리 권한 설정
@@ -49,11 +50,23 @@ echo 'agent_api_key_test' > /home/agent-admin/agent-app/api_keys/secret.key
 chown agent-admin:agent-core /home/agent-admin/agent-app
 chmod 750 /home/agent-admin/agent-app
 
-chown agent-admin:agent-core /home/agent-admin/agent-app
-chmod 750 /home/agent-admin/upload_files
+chown agent-admin:agent-core /home/agent-admin/agent-app/upload_files
+chmod 750 /home/agent-admin/agent-app/upload_files
 
 chown agent-dev:agent-core /home/agent-admin/agent-app/bin/moniter.sh
 chmod 750 /home/agent-admin/agent-app/bin/moniter.sh
+
+chown agent-admin:agent-core /home/agent-admin/agent-app/api_keys
+chmod 750 /home/agent-admin/agent-app/api_keys
+
+chown agent-admin:agent-core /home/agent-admin/agent-app/api_keys/secret.key
+chmod 660 /home/agent-admin/agent-app/api_keys/secret.key
+
+chown agent-dev:agent-core /var/log/agent-app
+chmod 770 /var/log/agent-app
+
+chown agent-dev:agent-core /var/log/agent-app/monitor.log
+chmod 660 /var/log/agent-app/monitor.log
 ```
 
 # 6. 사용자 전환, 환경변수 설정, 파일 실행
